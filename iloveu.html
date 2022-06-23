@@ -6,14 +6,17 @@
     <title>Love between Us</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+
 </head>
 
 <body>
-    <audio src="./music.mp3" autoplay="true" loop="loop"></audio>
+    <audio id="ad">
+        <source src="./music.mp3" />
+    </audio>
     <div id="back">
         <div class="mask"></div>
         <!-- 设置展示的图片，github pages不能有后台程序只能一条一条手动添加了 囧 -->
-        <div id="carousel"  class="carousel slide carousel-fade carousel-position">
+        <div id="carousel" class="carousel slide carousel-fade carousel-position">
             <div class="carousel-inner" style="width: 100%;height: 100%;" id="background">
                 <div class="item active" style="width: 100%;height: 100%;">
                     <div style="width: 100%; height: 100%; background: url(./img/1.jpg); background-size: contain; background-repeat: no-repeat; background-position:center;"></div>
@@ -84,52 +87,63 @@
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/count-time.js"></script>
     <script>
-    $(function() {
-        //设置起始日期
-        countTime('2022/03/16 01:03', 'day', 'hour', 'minute', 'second');
-        var days = $('#day').text();
+        $(function () {
 
-        // 设置标题
-        if (parseInt(days / 365) != 0) {
-            $(document).attr("title", "在一起" + parseInt(days / 365) + "年,感谢相伴。");
-        } else if (parseInt(days / 30) != 0) {
-            $(document).attr("title", "在一起" + parseInt(days / 30) + "个月,感谢相伴。");
-        } else
-            $(document).attr("title", "在一起" + days + "天,感谢相伴。");
+            //设置起始日期
+            countTime('2022/03/16 01:03', 'day', 'hour', 'minute', 'second');
+            var days = $('#day').text();
 
-        //设置每一张图片对应的文字
-        var says = new Array(
-            "师妹，你是不是很紧张？---对啊，心跳的超快！",
-            "妹妹，我想，以后每年都能在一起看花，可以吗？",
-            "我把妹妹戴在手上啦，我要永远。",
-            "第一次真正的合照，他们都说好甜。",
-            "南沙天后宫。我许的愿除了论文，还有你。",
-            "你的电脑屏保，所以，它成了我的最爱",
-            "你躺在我腿上，我像是拥有了全世界",
-            "送你戒指的那一晚，我们有了对未来的期盼",
-            "大学城。中心湖，我带你来到了我最初的广州记忆",
-            "东莞松山湖。你真的真的好可爱。",
-            "毕业了。但我们的故事刚刚开始",
-            "我会永远在你身旁",
-            "我会永远给你依靠。",
-            "我会，永远看着你笑。",
-        );
+            // 设置标题
+            if (parseInt(days / 365) != 0) {
+                $(document).attr("title", "在一起" + parseInt(days / 365) + "年,感谢相伴。");
+            } else if (parseInt(days / 30) != 0) {
+                $(document).attr("title", "在一起" + parseInt(days / 30) + "个月,感谢相伴。");
+            } else
+                $(document).attr("title", "在一起" + days + "天,感谢相伴。");
+
+            //设置每一张图片对应的文字
+            var says = new Array(
+                "师妹，你是不是很紧张？---对啊，心跳的超快！",
+                "妹妹，我想，以后每年都能在一起看花，可以吗？",
+                "我把妹妹戴在手上啦，我要永远。",
+                "第一次真正的合照，他们都说好甜。",
+                "南沙天后宫。我许的愿除了论文，还有你。",
+                "你的电脑屏保，所以，它成了我的最爱",
+                "你躺在我腿上，我像是拥有了全世界",
+                "送你戒指的那一晚，我们有了对未来的期盼",
+                "大学城。中心湖，我带你来到了我最初的广州记忆",
+                "东莞松山湖。你真的真的好可爱。",
+                "毕业了。但我们的故事刚刚开始",
+                "我会永远在你身旁",
+                "我会永远给你依靠。",
+                "我会，永远看着你笑。",
+            );
 
 
-        var start = function() {
-            var index = 0;
-            var rate = 6000;
-            $('#say').text(says[(index++) % says.length]);
-         	var _play = function () {
-         		$('#say').hide();
+            var start = function () {
+                var index = 0;
+                var rate = 6000;
                 $('#say').text(says[(index++) % says.length]);
-                $('#say').fadeToggle();
-                $('#carousel').carousel('next');
-         	};
-            setInterval(_play, rate);
-        }();
+                var _play = function () {
+                    $('#say').hide();
+                    $('#say').text(says[(index++) % says.length]);
+                    $('#say').fadeToggle();
+                    $('#carousel').carousel('next');
+                };
+                setInterval(_play, rate);
+            }();
 
-    });
+        });
+    </script>
+    <script>
+        document.onclick = function () {
+            var music = document.getElementById('ad');
+            var text = document.getElementById('ts');
+            console.log(music);
+            console.log(music.paused);
+            music.play();
+            text.hide();
+        }
     </script>
 </body>
 
